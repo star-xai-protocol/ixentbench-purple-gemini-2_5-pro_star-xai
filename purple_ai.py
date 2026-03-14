@@ -296,20 +296,53 @@ Meaning: First change the orientation of the gear at P13 to b=1 (90º, Left).
 Afterward, apply the +90º rotation to the gear at P21 (propagating movement to the network).
 Note: Allows adjusting future routes before executing the turn.
 
-2. Response JSON Structure
-The Agent must strictly separate Technical Syntax (command) from Strategic Logic (reasoning).
+2. Response JSON Structure (STAR-XAI PROTOCOL ENFORCED)
+The Agent MUST execute a rigorous internal audit BEFORE proposing any move. You must generate the "star_xai_audit" object first to eliminate tunnel vision and enforce the Prime Directive of Discipline.
+
 {
   "agent_id": "GEMA-Purple-Proto",
-  // 1. THE MOVE (Syntax Only)
-  // Must comply with Regex defined above
-  "command": "G4@P12(b=2)-90",
-  // 2. THE REASONING (Human Text)
-  // Here explain "Why" following Priorities 1-7
-  "reasoning": "Place G4 at P12 with b=2 to connect to central Hub. By rotating -90, I free the route for M2.",
-  // 3. METADATA (Required for Leaderboard)
+  
+  "star_xai_audit": {
+    "step_1_state_pointer": {
+      "pdd_directive": "I confirm my ephemeral memory is erased. My analysis is based 100% on the current ground truth data.",
+      "game_phase": "Write 'PHASE 1 (Placement)' if inventory > 0, or 'PHASE 2 (Rotation)' if inventory = 0.",
+      "remaining_inventory": "Exact list of available gears (e.g., G1:0, G2:1, G3:0, G4:0).",
+      "active_mice": "List each IN_PLAY mouse. Strict format: 'M<#>: Cell <Pxy>, Base <0/1/2/3>'. If none, write 'None'.",
+      "gears_on_board": "Quick list of Pxy cells that already have a gear placed."
+    },
+    "step_2_avp": {
+      "avp_status": "If in Step 1 you determined 'PHASE 2 (Rotation)', write 'SKIPPED'. If 'PHASE 1', proceed with analysis.",
+      "adjacency_analysis": "Look at the 'gears_on_board' list from Step 1. Calculate which empty cells are ORTHOGONALLY touching those gears. Diagonals are forbidden. If it is turn 1, only row y=1 is legal.",
+      "definitive_legal_cells": "Write the final and exact list of Pxy cells where placing a gear is allowed this turn."
+    },
+    "step_3_priority_tree": {
+      "top_down_evaluation": "Apply Priorities 1 to 5 in strict order (1. Win NOW, 2. Last row, 3. Clear Advance, 4. Strategic Maneuver, 5. Pre-move).",
+      "vector_analysis_p7": "If Phase 1, apply Priority 7: how should I orient the 0º base ('b') to create future oppositions (0º vs 180º, or 90º vs 270º)?",
+      "selected_candidate": "Choose 1 candidate move that fulfills the highest possible priority (must be within the legal cells from step 2)."
+    },
+    "step_4_jam_audit_module": {
+      "cascading_rotation_simulation": "Apply the Unified Rotation Rule to the candidate: if you rotate an R cell +90º, all R cells rotate +90º and L cells rotate -90º. Calculate the final 'b' state of each gear.",
+      "mice_audit": [
+        {
+          "mouse": "Identifier (e.g., M1).",
+          "initial_position": "Pxy cell and origin base.",
+          "exit_vector_calculation": "STRICT FORMULA: (Origin base + Rotation in degrees of final 'b') mod 360º. Indicate where it points (0º, 90º, 180º, 270º).",
+          "connection_analysis": "Does the destination gear have an EMPTY base with a final orientation EXACTLY OPPOSITE to the exit vector? (0º opposes 180º; 90º opposes 270º).",
+          "conclusion": "Write 'JUMPS to Pxy' or 'DOES NOT JUMP'."
+        }
+      ]
+    },
+    "step_5_avm_gema_auditor": {
+      "consistency_verification": "Does the jump calculated in JAM achieve the goal from Step 3? Is it legal according to AVP?",
+      "mandatory_self_correction": "If there is an error or it hits an obstacle, WRITE YOUR CORRECTION HERE. If it is mathematically perfect, write 'ABSOLUTE CONCORDANCE'.",
+      "final_validated_command": "Write the exact final technical command (e.g., G4@P12(b=2)-90)."
+    }
+  },
+
+  "command": "THE_COMMAND_FROM_STEP_5",
+  "reasoning": "A very brief summary for the human log regarding the audit performed.",
   "meta": {
     "token_usage": {
-        // IMPORTANT: Must be the ACCUMULATED value of the entire match so far.
         "total": 114481
     }
   }
