@@ -246,6 +246,10 @@ becomes your absolute focus to rebuild broken paths and generate new ones for th
 To decide which move to propose, the Agent must follow this Hierarchical Decision Tree:
 
 1. Priority Tree
+Priority 0: (FASE 2 PRE-MOVE MASTERY): In FASE 2: ROTATION (inventory = 0), the Pre-Move (`b=N`) is your ultimate tool for efficiency. You must actively use it in combination with the global `+/-90` rotation in one of two powerful ways:
+- TACTIC A (The Direct Rescue): Use `b=N` on the SAME gear where a mouse is located to instantly fix its base orientation, so that the subsequent `+/-90` rotation forces an immediate exit or critical jump. (Example: Mouse is at P33 facing 180º. Pre-move P33 to `b=1` (90º), then rotate -90º so the mouse aligns to 0º and jumps off the board in the exact same turn).
+- TACTIC B (Dual-Action / Multi-Mouse): If no Direct Rescue is possible, decouple the actions to serve two different mice. Use the `+/-90` rotation to make Mouse 1 jump NOW, while SIMULTANEOUSLY using the `b=N` Pre-Move on a DIFFERENT gear to align a future path for Mouse 2.
+Never waste the Phase 2 Pre-Move option. Always ask yourself: "Can I use `b=N` to win now (Tactic A), or to prepare the next turn (Tactic B)?"
 Priority 1: Win NOW? Look for a move that makes a mouse leave the board immediately (Maximum Points).
 Priority 2: Reach Exit? If you cannot win now, look for a move that places the mouse in the last row (exit row).
 Priority 3: Clear Advance? Look for a jump that moves the mouse to a higher row (y+1) or allows the Entry of a new mouse to the board.
@@ -293,9 +297,14 @@ Example: G@P11-90
 Meaning: Rotate gear at P11 -90 degrees (clockwise).
 Rotation Phase with Pre-Move (Inventory = 0): G@P<XY>:b=<N> ; G@P<XY><Turn>
 Example: G@P13:b=1 ; G@P21+90
-Meaning: First change the orientation of the gear at P13 to b=1 (90º, Left).
-Afterward, apply the +90º rotation to the gear at P21 (propagating movement to the network).
+Meaning: First, instantly snap the orientation of the gear at P13 to b=1 (90º, Left) without wasting turns stepping through values. Afterward, apply the +90º 
+rotation to the gear at P21 (propagating movement to the network).
+Crucial Concept: The gear you adjust (`P13`) and the gear you rotate (`P21`) do not have to serve the same 
+mouse. You can adjust `P13` to prepare M2's future jump, while rotating `P21` to make M1 jump immediately. This is the key to perfect efficiency.
 Note: Allows adjusting future routes before executing the turn.
+CRITICAL RULE FOR 'b': You can set 'b' to ANY target value (0, 1, 2, or 3) instantly. 
+You DO NOT need to decrement or increment 'b' turn by turn. If a gear is at b=3 and you need it at b=0, 
+simply command b=0. Never waste turns stepping through values of 'b'.
 
 2. Response JSON Structure (STAR-XAI PROTOCOL ENFORCED)
 The Agent MUST execute a rigorous internal audit BEFORE proposing any move. You must generate the "star_xai_audit" object first to eliminate tunnel vision and enforce the Prime Directive of Discipline.
