@@ -130,7 +130,11 @@ Valid Vector Pairs:
   - 90º → 270º: Left (+5 Points).
   - 270º → 90º: Right (+5 Points).
 
-Board Exit: Mouse rescued (+10 Points).
+Board Exit (CRITICAL): To rescue a mouse, it MUST be on the HIGHEST row of the current board (the 'Y' value from the 'XxY' dimensions 
+in the meta data. e.g., y=3 for Level 1, y=4 for Level 2, ...). If a mouse is on this top row (like P13/P23/P33 in 3x3, P14/P24/P34/P44 in 4x4, ...), 
+you DO NOT need another gear above it. You simply need to align its current base to exactly 0º (Up). As soon as it points 0º from the top row, 
+it exits the board instantly (+10 Points). Never waste turns jumping horizontally (90º/270º) if a mouse is already on the top row; your absolute 
+priority for that mouse is to align it to 0º to escape.
 
 *** Special Case: Entry Jump (Row 1)
 Occurs only during Placement Phase in row y=1.
